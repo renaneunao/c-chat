@@ -1,0 +1,10 @@
+[
+    {
+        "input": "Qual o nome do cliente com cpf 16485544875.",
+        "query": "SELECT nom_cliente FROM T_SQL_CLIENTE WHERE num_cpf_cnpj = '16485544875';"
+    },
+    {
+        "input": "liste todos os contratos de todos os clientes do maior grupo economico",
+        "query": "SELECT T_SQL_GRUPO_ECONOMICO.nom_grupo_economico, T_SQL_CLIENTE.nom_cliente, T_SQL_CREDITO.num_contrato, T_SQL_PARCELA.dat_vencimento, T_SQL_PARCELA.val_pago, T_SQL_PARCELA.val_parcela FROM T_SQL_GRUPO_ECONOMICO JOIN T_SQL_CLIENTE ON T_SQL_GRUPO_ECONOMICO.cod_grupo_economico = T_SQL_CLIENTE.cod_grupo_economico JOIN T_SQL_CREDITO ON T_SQL_CLIENTE.num_cpf_cnpj = T_SQL_CREDITO.num_cpf_cnpj JOIN T_SQL_PARCELA ON T_SQL_CREDITO.num_contrato = T_SQL_PARCELA.num_contrato AND T_SQL_CLIENTE.num_cpf_cnpj = T_SQL_PARCELA.num_cpf_cnpj WHERE T_SQL_GRUPO_ECONOMICO.nom_grupo_economico != 'NÃO INFORMADO' AND T_SQL_GRUPO_ECONOMICO.cod_grupo_economico = (SELECT T_SQL_GRUPO_ECONOMICO.cod_grupo_economico FROM T_SQL_GRUPO_ECONOMICO JOIN T_SQL_CLIENTE ON T_SQL_GRUPO_ECONOMICO.cod_grupo_economico = T_SQL_CLIENTE.cod_grupo_economico JOIN T_SQL_CREDITO ON T_SQL_CLIENTE.num_cpf_cnpj = T_SQL_CREDITO.num_cpf_cnpj GROUP BY T_SQL_GRUPO_ECONOMICO.cod_grupo_economico ORDER BY SUM(T_SQL_CREDITO.val_contrato) DESC LIMIT 1)"
+    }
+]
